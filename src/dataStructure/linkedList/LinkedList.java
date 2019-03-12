@@ -59,14 +59,14 @@ public class LinkedList<E> implements List<E>{
     //往指定位置插入数据
     @Override
     public void add(int index, E element) {
-        if(index>size){
+        if(index<1||index>size){
             throw new IndexOutOfBoundsException("超出范围");
         }
+
         Node<E> current=head;
-        while(index>0){
+        //循环到插入位置
+        for(int i=1;i<index;i++)
             current=current.next;
-            index--;
-        }
         Node<E> newNode=new Node<>(element);
         newNode.next=current.next;
         current.next=newNode;
@@ -74,8 +74,19 @@ public class LinkedList<E> implements List<E>{
     }
 
     @Override
-    public void remove(int index, E element) {
+    public void remove(int index) {
+        if(index<1||index>size){
+            throw new IndexOutOfBoundsException("超出范围");
+        }
 
+        Node<E> current=head;
+        //循环到删除位置
+        for(int i=1;i<index;i++)
+            current=current.next;
+
+        Node<E> temp=current.next;
+        current.next=temp.next;
+        size--;
     }
 
     @Override
@@ -113,8 +124,7 @@ public class LinkedList<E> implements List<E>{
         list.add(1);
         list.add(2);
         list.add(3);
-        list.add(4);
-        list.reverse();
+        list.add(2,4);
         list.display();
     }
 

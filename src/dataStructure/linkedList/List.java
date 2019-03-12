@@ -15,7 +15,7 @@ public interface List<E> {
     void add(int index,E element);
 
     //删除指定位置的数据
-    void remove(int index,E element);
+    void remove(int index);
 
     //反转
     void reverse();
