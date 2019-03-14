@@ -2,7 +2,7 @@ package dataStructure.linkedList;
 
 
 /**
- * 泛型 链表
+ * 单向链表
  * @param <E>
  */
 public class LinkedList<E> implements List<E>{
@@ -89,6 +89,12 @@ public class LinkedList<E> implements List<E>{
         size--;
     }
 
+
+    /**
+     * 反转 非递归
+     *
+     * 遍历链表，把每个节点插入到头节点之后
+     */
     @Override
     public void reverse() {
         //保存当前节点
@@ -99,6 +105,7 @@ public class LinkedList<E> implements List<E>{
             Node<E> next=current.next;
             //next为空说明已经到了链表的尾
             if(next==null){
+                //把每一个节点插入到头节点之后
                 head.next=current;
             }
             current.next=previous;
@@ -118,13 +125,43 @@ public class LinkedList<E> implements List<E>{
     }
 
 
+    /**
+     * 反转 递归实现
+     *
+     * 通过递归，先递归到最后一个节点然后开始往前返回倒序遍历每一个节点
+     * @param head 当前节点
+     * @return 返回的是当前反转之后的头节点
+     */
+    public Node<E> reverse(Node<E> head){
+        if(head==null||head.next ==null)
+            return head;
+
+        //递归到最后一个节点
+        Node<E> prev = reverse(head.next);
+
+        //头节点不包含数据因此需要进行判断
+        if(head!=this.head) {
+            head.next.next = head;
+            head.next = null;
+        }else{
+            //头节点指向当前反转之后的第一个数据节点
+            head.next=prev;
+            return head;
+        }
+        return prev;
+    }
+
+
 
     public static void main(String[] args) {
         LinkedList<Integer> list=new LinkedList<>();
         list.add(1);
         list.add(2);
         list.add(3);
-        list.add(2,4);
+        list.add(5);
+        list.display();
+        System.out.println("--------------");
+        list.reverse(list.head);
         list.display();
     }
 
