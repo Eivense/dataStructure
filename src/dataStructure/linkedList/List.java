@@ -9,7 +9,7 @@ public interface List<E> {
     void add(E element);
 
     //在头插入数据
-    void addHead(E element);
+    void addFirst(E element);
 
     //插入数据到指定位置
     void add(int index,E element);
@@ -22,4 +22,6 @@ public interface List<E> {
 
     //显示
     void display();
+
+    boolean isEmpty();
 }

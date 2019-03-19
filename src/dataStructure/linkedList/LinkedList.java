@@ -7,7 +7,7 @@ package dataStructure.linkedList;
  */
 public class LinkedList<E> implements List<E>{
 
-    //链表头指针
+    //链表头节点
     private Node<E> head;
 
     //链表长度
@@ -51,7 +51,13 @@ public class LinkedList<E> implements List<E>{
     }
 
     @Override
-    public void addHead(E element) {
+    public void addFirst(E element) {
+        Node<E> newNode = new Node<>(element);
+
+        Node<E> temp=head.next;
+        newNode.next=temp;
+        head.next=newNode;
+        size++;
 
     }
 
@@ -124,6 +130,11 @@ public class LinkedList<E> implements List<E>{
         }
     }
 
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
 
     /**
      * 反转 递归实现
@@ -155,10 +166,11 @@ public class LinkedList<E> implements List<E>{
 
     public static void main(String[] args) {
         LinkedList<Integer> list=new LinkedList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.add(5);
+//        list.add(1);
+//        list.add(2);
+//        list.add(3);
+//        list.add(5);
+        list.addFirst(6);
         list.display();
         System.out.println("--------------");
         list.reverse(list.head);
