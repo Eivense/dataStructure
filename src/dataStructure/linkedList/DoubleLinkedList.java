@@ -34,22 +34,39 @@ public class DoubleLinkedList<E> implements List<E>{
             this.element= element;
         }
     }
+
+
+    // 构造
+    public DoubleLinkedList() {
+
+        this.head = new Node<>();
+        this.tail = new Node<>();
+
+        //头节点指向尾节点
+        head.next=tail;
+        //尾节点指向头节点
+        tail.prev=head;
+    }
+
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public void add(E element) {
         Node<E> current=head;
 
-        while(head.next!=null){
-            current=head.next;
+        //循环到尾节点前
+        while(current.next!=tail){
+            current=current.next;
         }
+
         Node<E> newNode= new Node<>(element);
+        newNode.next=tail;
+        tail.prev=newNode;
         current.next=newNode;
         newNode.prev=current;
-        newNode.next=tail;
 
         size++;
     }
@@ -58,8 +75,7 @@ public class DoubleLinkedList<E> implements List<E>{
     public void addFirst(E element) {
         Node<E> newNode = new Node<>(element);
 
-        Node<E> temp=head.next;
-        newNode.next=temp;
+        newNode.next= head.next;
         newNode.prev=head;
         head.next=newNode;
 
@@ -83,11 +99,26 @@ public class DoubleLinkedList<E> implements List<E>{
 
     @Override
     public void display() {
-
+        Node<E> current=head.next;
+        while(current!=tail){
+            System.out.println(current.element);
+            current=current.next;
+        }
     }
 
     @Override
     public boolean isEmpty() {
         return size == 0;
+    }
+
+
+    public static void main(String[] args) {
+        DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
+
+        list.add(1);
+        list.add(2);
+        list.addFirst(3);
+        list.add(4);
+        list.display();
     }
 }
