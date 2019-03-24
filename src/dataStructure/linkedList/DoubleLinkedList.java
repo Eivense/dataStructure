@@ -75,27 +75,78 @@ public class DoubleLinkedList<E> implements List<E>{
     public void addFirst(E element) {
         Node<E> newNode = new Node<>(element);
 
-        newNode.next= head.next;
-        newNode.prev=head;
-        head.next=newNode;
+        // 当链表为空时 需要处理尾节点
+        if(isEmpty()){
+            head.next=newNode;
+            newNode.prev=head;
+            newNode.next=tail;
+            tail.prev = newNode;
+        }
+        // 不为空时 不需要处理尾节点
+        else{
+            head.next.prev = newNode;
+            newNode.next= head.next;
+            newNode.prev=head;
+            head.next=newNode;
+        }
 
         size++;
     }
 
     @Override
     public void add(int index, E element) {
+        if(index<1||index>size){
+            throw new IndexOutOfBoundsException("超出范围");
+        }
 
+        Node<E> current=head;
+        // 循环到指定位置
+        for (int i = 1; i < index; i++) {
+            current=current.next;
+        }
+
+        Node<E> newNode = new Node<>(element);
+        current.next.prev=newNode;
+        newNode.next=current.next;
+        newNode.prev=current;
+        current.next = newNode;
+
+        size++;
     }
 
     @Override
     public void remove(int index) {
+        if(index<1||index>size){
+            throw new IndexOutOfBoundsException("超出范围");
+        }
+
+        Node<E> current=head;
+        // 循环到指定位置
+        for (int i = 1; i < index; i++) {
+            current=current.next;
+        }
+
+        current.prev.next=current.next;
+        current.next.prev = current.prev;
+
+        size--;
 
     }
 
+
+    /**
+     *  反转 非递归
+     */
     @Override
     public void reverse() {
 
+        Node<E> current = head;
+
+        while (current.next != tail) {
+
+        }
     }
+
 
     @Override
     public void display() {
@@ -103,6 +154,18 @@ public class DoubleLinkedList<E> implements List<E>{
         while(current!=tail){
             System.out.println(current.element);
             current=current.next;
+        }
+    }
+
+
+    /**
+     * 倒序输出
+     */
+    public void reverseDisplay(){
+        Node<E> current=tail.prev;
+        while(current!=head){
+            System.out.println(current.element);
+            current = current.prev;
         }
     }
 
@@ -115,10 +178,13 @@ public class DoubleLinkedList<E> implements List<E>{
     public static void main(String[] args) {
         DoubleLinkedList<Integer> list = new DoubleLinkedList<>();
 
-        list.add(1);
-        list.add(2);
+        list.addFirst(4);
+        list.addFirst(5);
         list.addFirst(3);
-        list.add(4);
+
         list.display();
+        System.out.println("-------------");
+        list.reverseDisplay();
+
     }
 }

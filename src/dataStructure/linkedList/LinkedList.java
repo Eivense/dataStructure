@@ -54,8 +54,7 @@ public class LinkedList<E> implements List<E>{
     public void addFirst(E element) {
         Node<E> newNode = new Node<>(element);
 
-        Node<E> temp=head.next;
-        newNode.next=temp;
+        newNode.next= head.next;
         head.next=newNode;
         size++;
 
@@ -65,14 +64,15 @@ public class LinkedList<E> implements List<E>{
     //往指定位置插入数据
     @Override
     public void add(int index, E element) {
-        if(index<1||index>size){
+        if(index<1||index>size+1){
             throw new IndexOutOfBoundsException("超出范围");
         }
 
         Node<E> current=head;
         //循环到插入位置
-        for(int i=1;i<index;i++)
+        for (int i = 1; i < index; i++) {
             current=current.next;
+        }
         Node<E> newNode=new Node<>(element);
         newNode.next=current.next;
         current.next=newNode;
@@ -81,14 +81,15 @@ public class LinkedList<E> implements List<E>{
 
     @Override
     public void remove(int index) {
-        if(index<1||index>size){
+        if(index<1||index>size+1){
             throw new IndexOutOfBoundsException("超出范围");
         }
 
         Node<E> current=head;
         //循环到删除位置
-        for(int i=1;i<index;i++)
+        for (int i = 1; i < index; i++) {
             current=current.next;
+        }
 
         Node<E> temp=current.next;
         current.next=temp.next;
@@ -170,7 +171,10 @@ public class LinkedList<E> implements List<E>{
 //        list.add(2);
 //        list.add(3);
 //        list.add(5);
-        list.addFirst(6);
+        list.add(1,21);
+        list.add(2, 1);
+        list.remove(2);
+
         list.display();
         System.out.println("--------------");
         list.reverse(list.head);
