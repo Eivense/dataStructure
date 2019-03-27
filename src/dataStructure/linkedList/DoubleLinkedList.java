@@ -140,11 +140,21 @@ public class DoubleLinkedList<E> implements List<E>{
     @Override
     public void reverse() {
 
-        Node<E> current = head;
-
-        while (current.next != tail) {
-
+        //保存当前节点
+        Node<E> current=head.next;
+        //保存上一节点
+        Node<E> previous=tail;
+        Node<E> next;
+        while(current!=tail){
+           next=current.next;
+           current.next=previous;
+           previous.prev=current;
+           previous=current;
+           current = next;
         }
+        previous.prev=head;
+        head.next = previous;
+
     }
 
 
@@ -184,7 +194,8 @@ public class DoubleLinkedList<E> implements List<E>{
 
         list.display();
         System.out.println("-------------");
-        list.reverseDisplay();
+        list.reverse();
+        list.display();
 
     }
 }
