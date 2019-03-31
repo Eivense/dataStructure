@@ -8,7 +8,7 @@ package dataStructure.linkedList;
 public class LinkedList<E> implements List<E>{
 
     //链表头节点
-    private Node<E> head;
+    private transient  Node<E> head;
 
     //链表长度
     private int size=0;
@@ -140,24 +140,24 @@ public class LinkedList<E> implements List<E>{
      * 反转 递归实现
      *
      * 通过递归，先递归到最后一个节点然后开始往前返回倒序遍历每一个节点
-     * @param head 当前节点
+     * @param current 当前节点
      * @return 返回的是当前反转之后的头节点
      */
-    public Node<E> reverse(Node<E> head){
-        if(head==null||head.next ==null)
-            return head;
+    public Node<E> reverse(Node<E> current){
+        if(current==null||current.next ==null)
+            return current;
 
         //递归到最后一个节点
-        Node<E> prev = reverse(head.next);
+        Node<E> prev = reverse(current.next);
 
         //头节点不包含数据因此需要进行判断
-        if(head!=this.head) {
-            head.next.next = head;
-            head.next = null;
+        if(current!=this.head) {
+            current.next.next = current;
+            current.next = null;
         }else{
             //头节点指向当前反转之后的第一个数据节点
-            head.next=prev;
-            return head;
+            current.next=prev;
+            return current;
         }
         return prev;
     }
@@ -170,9 +170,7 @@ public class LinkedList<E> implements List<E>{
         list.add(2);
         list.add(3);
         list.add(5);
-//        list.add(1,21);
-//        list.add(2, 1);
-//        list.remove(2);
+        list.remove(1);
 
         list.display();
         System.out.println("--------------");

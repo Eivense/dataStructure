@@ -7,10 +7,10 @@ package dataStructure.linkedList;
 public class DoubleLinkedList<E> implements List<E>{
 
     //链表头节点
-    private Node<E> head;
+    private transient  Node<E> head;
 
     //链表尾节点
-    private Node<E> tail;
+    private transient  Node<E> tail;
 
     //链表长度
     private int size=0;
@@ -116,7 +116,7 @@ public class DoubleLinkedList<E> implements List<E>{
 
     @Override
     public void remove(int index) {
-        if(index<1||index>size){
+        if(index<1||index>size+1){
             throw new IndexOutOfBoundsException("超出范围");
         }
 
@@ -126,8 +126,10 @@ public class DoubleLinkedList<E> implements List<E>{
             current=current.next;
         }
 
-        current.prev.next=current.next;
-        current.next.prev = current.prev;
+        Node<E> temp=current.next;
+        current.next=temp.next;
+        temp.next.prev=current;
+
 
         size--;
 
@@ -160,19 +162,25 @@ public class DoubleLinkedList<E> implements List<E>{
     /**
      * 反转 递归实现
      *
+     * 原先为 head->1->2->3->tail
+     * 递归后为 tail->3->2->1->head
+     * 最后交换头尾节点即可
      */
-    public Node<E> reverse(Node<E> head) {
-        if(head==null||head.next==null){
-            return head;
+    public Node<E> reverse(Node<E> current) {
+        if(current==null||current.next==null){
+            return current;
         }
-        Node<E> prev = reverse(head.next);
+        Node<E> prev = reverse(current.next);
 
-        if(head!=this.head){
-            head.next.next = head;
-            head.next = tail;
-            head.prev=prev;
-        }else{
-            this.head=prev;
+        current.next.next = current;
+        current.prev=current.next;
+
+        // 当当前节点为头节点时 交换头尾节点
+        if(current==head){
+            // 交换头尾节点
+            Node<E> temp=head;
+            head=tail;
+            tail=temp;
         }
         return prev;
     }
@@ -213,10 +221,15 @@ public class DoubleLinkedList<E> implements List<E>{
         list.addFirst(3);
 
         list.display();
+        list.remove(1);
         System.out.println("-------------");
-        list.reverse(list.head);
+
         list.display();
-        list.reverseDisplay();
+
+
+//        list.reverse(list.head);
+//        list.display();
+//        list.reverseDisplay();
 
     }
 }
