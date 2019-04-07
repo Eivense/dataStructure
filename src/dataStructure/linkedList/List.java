@@ -1,5 +1,9 @@
 package dataStructure.linkedList;
 
+/**
+ * 链表接口
+ * @param <E>
+ */
 public interface List<E> {
 
     //获取链表长度
