@@ -6,7 +6,7 @@ package dataStructure.deque;
  *
  * 所有方法失败抛出异常
  *
- * 抛出异常       返回null
+ * 抛出异常       返回null或者boolean
  * addFirst       offerFirst
  * addLast        offerLast
  * removeFirst    pollFirst
@@ -35,25 +35,25 @@ public interface Deque<E> {
      * 删除队首节点，并返回被删除的节点
      * @return 返回被删除的节点
      */
-    E removeFirst();
+    E pollFirst();
 
 
     /**
      * 删除队尾节点，并返回被删除的节点
      * @return 返回被删除的节点
      */
-    E removeLast();
+    E pollLast();
 
 
     /**
      * 获取并返回队首节点
      * @return 返回头节点
      */
-    E getFirst();
+    E peekFirst();
 
     /**
      * 获取并返回队尾节点
      * @return 返回尾节点
      */
-    E getLast();
+    E peekLast();
 }

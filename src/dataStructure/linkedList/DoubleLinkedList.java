@@ -142,11 +142,13 @@ public class DoubleLinkedList<E> implements List<E>{
     @Override
     public void reverse() {
 
-        //保存当前节点
+        // 保存当前节点
         Node<E> current=head.next;
-        //保存上一节点
+        // 保存上一节点
         Node<E> previous=tail;
+        // 保存下一节点
         Node<E> next;
+
         while(current!=tail){
            next=current.next;
            current.next=previous;
@@ -165,11 +167,15 @@ public class DoubleLinkedList<E> implements List<E>{
      * 原先为 head->1->2->3->tail
      * 递归后为 tail->3->2->1->head
      * 最后交换头尾节点即可
+     *
+     * 每次返回的都是当前的头节点
      */
     public Node<E> reverse(Node<E> current) {
         if(current==null||current.next==null){
             return current;
         }
+
+        // 递归到tail开始返回
         Node<E> prev = reverse(current.next);
 
         current.next.next = current;
@@ -221,9 +227,10 @@ public class DoubleLinkedList<E> implements List<E>{
         list.addFirst(3);
 
         list.display();
-        list.remove(1);
+
         System.out.println("-------------");
 
+        list.reverse();
         list.display();
 
 

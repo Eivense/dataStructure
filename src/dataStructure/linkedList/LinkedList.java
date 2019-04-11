@@ -104,19 +104,21 @@ public class LinkedList<E> implements List<E>{
      */
     @Override
     public void reverse() {
-        //保存当前节点
-        Node<E> current=head;
-        //保存上一节点
+        // 保存当前节点
+        Node<E> current=head.next;
+        // 保存上一节点
         Node<E> previous=null;
+        // 保存下一节点
         Node<E> next;
 
-        //next为空说明已经到了链表的尾
-        while(current.next!=null){
+        //current为空说明已经到了链表的尾
+        while(current!=null){
             next=current.next;
             current.next=previous;
             previous=current;
             current=next;
         }
+        head.next=previous;
 
     }
 
@@ -144,10 +146,11 @@ public class LinkedList<E> implements List<E>{
      * @return 返回的是当前反转之后的头节点
      */
     public Node<E> reverse(Node<E> current){
+        // 从最后一个有数据的节点开始返回
         if(current==null||current.next ==null)
             return current;
 
-        //递归到最后一个节点
+        //递归到最后一个非空节点开始返回
         Node<E> prev = reverse(current.next);
 
         //头节点不包含数据因此需要进行判断
@@ -170,7 +173,6 @@ public class LinkedList<E> implements List<E>{
         list.add(2);
         list.add(3);
         list.add(5);
-        list.remove(1);
 
         list.display();
         System.out.println("--------------");
