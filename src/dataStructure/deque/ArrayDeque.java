@@ -14,6 +14,7 @@ public class ArrayDeque<E> implements Deque<E> {
 
 
     // 由于泛型不能创建数组 只能用Object之后再强转
+    // 涉及到泛型的类型擦除
     transient Object[] elements;
 
 
