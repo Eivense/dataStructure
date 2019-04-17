@@ -1,6 +1,8 @@
 package algorithm.sort;
 
 
+import java.util.Random;
+
 /**
  * 快速排序
  *
@@ -51,6 +53,24 @@ public class QuickSort {
         // 返回主元下标
         return i+1;
     }
+
+
+    /**
+     * 随机快速排序
+     *
+     * 每次随机选择主元，对数组的划分可以更加均衡
+     */
+    private static int random_partition(int[] array,int p,int r){
+        Random random = new Random();
+        // 生成在p到r之间的随机数
+        int q=random.nextInt(r-p+1)+p;
+
+        // q为随机选择出来的主元交换到最后一个
+        swap(array,q,r);
+
+        return partition(array,p,r);
+    }
+
 
     /**
      * 交换两个元素
