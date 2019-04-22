@@ -10,7 +10,7 @@ package algorithm.sort;
  *  空间复杂度 O(1) 用于保存temp
  *
  */
-public class BubbleSort {
+public class BubbleSort{
 
     public static void sort(int[] array){
         int length=array.length;
@@ -38,4 +38,5 @@ public class BubbleSort {
         array[i]=array[j];
         array[j]=temp;
     }
+
 }
