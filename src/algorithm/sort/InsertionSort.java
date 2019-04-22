@@ -13,13 +13,14 @@ public class InsertionSort {
         for (int i = 1; i < array.length; i++) {
             int temp=array[i];
 
+            int j = i;
             // 如果当前数据比前一位数据大，则开始找到当前数据应该放的位置
-            while(array[i-1]>temp){
-                array[i]=array[i-1];
-                i--;
+            while (j >= 0 && array[j - 1] > temp) {
+                array[j] = array[j - 1];
+                j--;
             }
             // 把当前数据放到合适位置
-            array[i]=temp;
+            array[j] = temp;
         }
     }
 
