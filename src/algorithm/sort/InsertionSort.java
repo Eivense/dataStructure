@@ -1,5 +1,7 @@
 package algorithm.sort;
 
+import java.util.Arrays;
+
 /**
  * 简单插入排序
  *
@@ -16,7 +18,7 @@ public class InsertionSort {
             // 保存当前元素的下标
             int j = i;
             // 如果当前数据比前一位数据大，则开始找到当前数据应该放的位置
-            while (j >= 0 && array[j - 1] > temp) {
+            while (j >= 1 && array[j - 1] > temp) {
                 array[j] = array[j - 1];
                 j--;
             }
@@ -25,6 +27,11 @@ public class InsertionSort {
         }
     }
 
+    public static void main(String[] args) {
+        int[] a={4,2,17,5,12,4,8,3,15};
+        sort(a);
+        System.out.println(Arrays.toString(a));
+    }
 
 }
 

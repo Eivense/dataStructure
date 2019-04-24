@@ -7,7 +7,6 @@ package algorithm.sort;
  *
  *  时间复杂度 O(n^2)
  *
- *  空间复杂度 O(1) 用于保存temp
  *
  */
 public class BubbleSort{
