@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class MergeSort {
 
 
+    // 自顶向下的归并
     public static void sort(int[] array){
         mergeSort(array,0,array.length-1);
     }
@@ -33,12 +34,22 @@ public class MergeSort {
 
         int i=left,j=mid+1;
         for(int k=left;k<=right;k++){
-            // 左边元素处理完毕
+            // 左边元素处理完毕 右边就不需要再比较，直接放到数组中
             if(i>mid){
+                array[k]=temp[j-left];
                 j++;
             }
-            // 右边元素处理完毕
+            // 右边元素处理完毕 左边就不需要再比较，直接放到数组中
             else if(j>right){
+                array[k]=temp[i-left];
+                i++;
+            }
+            else if(temp[i-left]>temp[j-left]){
+                array[k]=temp[j-left];
+                j++;
+            }
+            else{
+                array[k]=temp[i-left];
                 i++;
             }
         }
