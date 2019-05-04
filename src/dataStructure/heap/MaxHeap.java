@@ -4,10 +4,12 @@ package dataStructure.heap;
  * 最大堆
  * 基于数组实现
  */
-public class MaxHeap<E extends  Comparable<? extends E>> {
+public class MaxHeap<E extends  Comparable<? super E>> {
 
 
     private Object[] heap;
+
+    // 堆中元素个数
     private int size;
 
     // 堆的容量
@@ -22,29 +24,13 @@ public class MaxHeap<E extends  Comparable<? extends E>> {
     public MaxHeap(int capacity){
         heap = new Object[capacity];
         this.capacity=capacity;
-        size=0;
     }
 
-
-    /**
-     * 求父节点的下标
-     * @param pos 节点下标
-     * @return 父节点下标
-     */
-    public int parent(int pos){
-        return pos/2;
+    public MaxHeap(E[] elements){
+        size=elements.length;
+        heap=elements;
+        buildHeap();
     }
-
-
-    public int left(int pos){
-        return 2*pos;
-    }
-
-    public int right(int pos){
-        return 2*pos+1;
-    }
-
-
 
     public void extractMax(){
 
@@ -55,11 +41,21 @@ public class MaxHeap<E extends  Comparable<? extends E>> {
 
     }
 
-    public void build(){
+    public void buildHeap(){
 
     }
 
-    public void maxHeapify(){
+    public void heapify(){
 
     }
+
+    public void siftDown(int pos,E element){
+
+    }
+
+    public void siftUp(int pos,E element){
+
+    }
+
+
 }
